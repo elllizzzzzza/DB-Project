@@ -1,0 +1,36 @@
+package org.example.hospital.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+@Entity
+@Table(name = "doctors")
+public class Doctor extends User {
+
+    private String info;
+    private String licenseNum;
+    private String roomNum;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Schedule> schedule;
+
+    @ManyToMany(mappedBy = "doctors")
+    private List<Patient> patients;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Prescription> prescriptions;
+
+    @OneToMany(mappedBy = "requestedByDoctor", cascade = CascadeType.ALL)
+    private List<LabTest> labTests;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Appointment> appointments;
+
+}
