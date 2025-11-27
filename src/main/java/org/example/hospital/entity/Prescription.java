@@ -3,6 +3,7 @@ package org.example.hospital.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -27,10 +28,12 @@ public class Prescription {
     @JoinColumn(name = "pharmacist_id")
     private Pharmacist dispensedBy;
 
-    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
-    private List<PrescriptionItem> items;
+    @ManyToOne
+    @JoinColumn(name = "test_id")
+    private Procedure procedure;
 
-
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Drug> items = new ArrayList<>();
 
     @Transient
     private double totalPrice;

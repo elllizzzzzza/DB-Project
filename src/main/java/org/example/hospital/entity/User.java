@@ -22,17 +22,19 @@ public abstract class User implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 50,name="username")
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name="password")
     private String password;
 
-    @Column(unique = true)
+    @Column(unique = true,name="email")
     private String email;
-
+    @Column(name="name")
     private String name;
+    @Column(name="surname")
     private String surname;
+    @Column(name="phone_num")
     private String phoneNum;
 
     @Enumerated(EnumType.STRING)
