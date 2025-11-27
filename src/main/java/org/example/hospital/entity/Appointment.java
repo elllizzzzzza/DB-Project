@@ -20,7 +20,8 @@ public class Appointment {
     private LocalDateTime startTime;
     @Column(name="end_time")
     private LocalDateTime endTime;
-
+    @Column(name ="stauts")
+    private String stauts;
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;

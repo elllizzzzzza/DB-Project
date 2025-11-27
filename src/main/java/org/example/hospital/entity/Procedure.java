@@ -24,9 +24,11 @@ public class Procedure {
     private String resultStatus;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "user_id")
     private Patient patient;
-
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private Doctor doctor;
     @ManyToOne
     @JoinColumn(name = "lab_id")
     private Lab lab;

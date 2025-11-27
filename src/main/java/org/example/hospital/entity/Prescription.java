@@ -15,13 +15,16 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="pres_id")
     private Long presId;
-
+    @Column(name="dosage")
+    private String dosage;
+    @Column(name="frequency")
+    private String frequency;
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "user_id")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "user_id")
     private Doctor doctor;
 
     @ManyToOne
@@ -34,7 +37,10 @@ public class Prescription {
 
     @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Drug> items = new ArrayList<>();
-
+    @ManyToOne
+    @JoinColumn(name="drug_id")
+    private Drug drug;
     @Transient
     private double totalPrice;
+
 }

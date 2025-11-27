@@ -4,8 +4,11 @@ import lombok.Data;
 
 @Data
 public class PharmacistDTO {
-    private Long pharmacistId;
-    private String firstName;
-    private String lastName;
-    private String employmentStartDate;
+    private Long userId;
+    private String username;
+    private String email;
+    private String name;
+    private String surname;
+    private String phoneNum;
+    private String role;
 }
