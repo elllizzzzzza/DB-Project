@@ -17,5 +17,5 @@ public class LabTechnician extends User {
     private Lab lab;
 
     @OneToMany(mappedBy = "labTechnician", cascade = CascadeType.ALL)
-    private List<LabTest> labTests;
+    private List<Procedure> labTests;
 }

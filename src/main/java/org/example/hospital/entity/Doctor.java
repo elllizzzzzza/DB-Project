@@ -24,7 +24,7 @@ public class Doctor extends User {
     private List<Prescription> prescriptions;
 
     @OneToMany(mappedBy = "requestedByDoctor", cascade = CascadeType.ALL)
-    private List<LabTest> labTests;
+    private List<Procedure> procedures;
 
     @ManyToOne
     @JoinColumn(name = "department_id")

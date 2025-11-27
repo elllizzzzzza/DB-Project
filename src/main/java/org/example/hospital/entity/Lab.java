@@ -24,5 +24,5 @@ public class Lab {
     private List<LabTechnician> technicians;
 
     @OneToMany(mappedBy = "lab", cascade = CascadeType.ALL)
-    private List<LabTest> labTests;
+    private List<Procedure> procedures;
 }

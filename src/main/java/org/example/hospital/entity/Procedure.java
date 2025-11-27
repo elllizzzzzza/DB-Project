@@ -5,16 +5,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "lab_tests")
-public class LabTest {
+@Table(name = "procedure")
+public class Procedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="test_id")
     private Long testId;
-
+    @Column(name= "test_name")
     private String testName;
+    @Column(name = "date")
     private String date;
+    @Column(name = "result")
     private String result;
+    @Column(name = "resultStatus")
     private String resultStatus;
 
     @ManyToOne
