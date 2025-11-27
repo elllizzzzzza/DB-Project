@@ -1,16 +1,13 @@
 package org.example.hospital.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "nurses")
 public class Nurse extends User {
-
+    @Column(name = "nurse_level")
     private String nurseLevel;
 
     @ManyToOne

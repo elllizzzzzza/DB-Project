@@ -9,13 +9,11 @@ import java.util.List;
 @Entity
 @Table(name = "lab_technicians")
 public class LabTechnician extends User {
-
+    @Column(name= "employment_start_date")
     private String employmentStartDate;
-
     @ManyToOne
     @JoinColumn(name = "lab_id")
     private Lab lab;
-
     @OneToMany(mappedBy = "labTechnician", cascade = CascadeType.ALL)
     private List<Procedure> labTests;
 }

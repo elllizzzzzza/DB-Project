@@ -9,12 +9,15 @@ import java.util.List;
 @Entity
 @Table(name = "doctors")
 public class Doctor extends User {
-
+    @Column(name="info")
     private String info;
+    @Column(name="license_number")
     private String licenseNum;
+    @Column(name="room_num")
     private String roomNum;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @Column(name="schedule")
     private List<Schedule> schedule;
 
     @ManyToMany(mappedBy = "doctors")

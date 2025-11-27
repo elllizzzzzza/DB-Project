@@ -9,8 +9,9 @@ import java.util.List;
 @Entity
 @Table(name = "pharmacists")
 public class Pharmacist extends User {
-
+    @Column(name="license_number")
     private String licenseNum;
+    @Column(name="pharmacy_section")
     private String pharmacySection;
 
     @ManyToMany

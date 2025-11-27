@@ -12,6 +12,7 @@ public class Prescription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="pres_id")
     private Long presId;
 
     @ManyToOne
@@ -28,6 +29,8 @@ public class Prescription {
 
     @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
     private List<PrescriptionItem> items;
+
+
 
     @Transient
     private double totalPrice;
