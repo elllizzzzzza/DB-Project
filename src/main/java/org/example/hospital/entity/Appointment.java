@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,15 +14,19 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appt_id")
-    private Long appId;
-    @Column(name = "symptom")
+    private Long apptId;
+
     private String symptom;
+
     @Column(name="start_time")
     private LocalDateTime startTime;
+
     @Column(name="end_time")
     private LocalDateTime endTime;
-    @Column(name ="stauts")
-    private String stauts;
+
+    @Column(name ="status")
+    private String status;
+
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
@@ -30,7 +35,12 @@ public class Appointment {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
+    private List<Procedure> procedures;
+
+    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
+    private List<Prescription> prescriptions;
+
     @Transient
-    @Column(name="duration")
     private int duration;
 }

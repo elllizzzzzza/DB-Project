@@ -10,7 +10,7 @@ public class DoctorDTO {
     private String name;
     private String surname;
     private String phoneNum;
-    private String role;
+    //private String role;
     private String info;
     private String licenseNumber;
     private String roomNumber;

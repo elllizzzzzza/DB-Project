@@ -1,6 +1,10 @@
 package org.example.hospital.dto;
 
 import lombok.Data;
+import org.example.hospital.enums.BloodType;
+import org.example.hospital.enums.Gender;
+
+import java.time.LocalDate;
 
 @Data
 public class PatientDTO {
@@ -10,11 +14,11 @@ public class PatientDTO {
     private String name;
     private String surname;
     private String phoneNum;
-    private String role;
-    private String dateOfBirth;
-    private String gender;
+   // private String role;
+    private LocalDate dateOfBirth;
+    private Gender gender;
     private String address;
-    private String bloodType;
+    private BloodType bloodType;
     private String idCard;
     private String medicalInsurance;
 }

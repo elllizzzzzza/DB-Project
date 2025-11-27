@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "doctors")
 public class Doctor extends User {
-    @Column(name="info")
     private String info;
     @Column(name="license_number")
     private String licenseNum;
@@ -17,17 +16,10 @@ public class Doctor extends User {
     private String roomNum;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    @Column(name="schedule")
     private List<Schedule> schedule;
-
-    @ManyToMany(mappedBy = "doctors")
-    private List<Patient> patients;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Prescription> prescriptions;
-
-    @OneToMany(mappedBy = "requestedByDoctor", cascade = CascadeType.ALL)
-    private List<Procedure> procedures;
 
     @ManyToOne
     @JoinColumn(name = "department_id")

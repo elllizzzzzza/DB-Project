@@ -15,9 +15,8 @@ public class Department {
     @Column(name="dept_id")
     private Long deptId;
 
-    @Column(nullable = false,name = "name")
+    @Column(nullable = false)
     private String name;
-    @Column(name="description")
     private String description;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
