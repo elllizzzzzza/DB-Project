@@ -14,9 +14,7 @@ public class Lab {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="lab_id")
     private Long labId;
-    @Column(name="name")
     private String name;
-    @Column(name="location")
     private String location;
 
     @ElementCollection

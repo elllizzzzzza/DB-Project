@@ -3,7 +3,9 @@ package org.example.hospital.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.example.hospital.enums.BloodType;
+import org.example.hospital.enums.Gender;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -11,11 +13,12 @@ import java.util.List;
 @Table(name = "patients")
 public class Patient extends User {
     @Column(name="date_of_birth")
-    private String dateOfBirth;
-    @Column(name="gender")
-    private String gender;
-    @Column(name="address")
+    private LocalDate dateOfBirth;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
     private String address;
+
     @Enumerated(EnumType.STRING)
     @Column(name="blood_type")
     private BloodType bloodType;
@@ -23,14 +26,6 @@ public class Patient extends User {
     private String idCard;
     @Column(name="med_insurance")
     private String medicalInsurance;
-
-    @ManyToMany
-    @JoinTable(
-            name = "doctor_patient",
-            joinColumns = @JoinColumn(name = "patient_id"),
-            inverseJoinColumns = @JoinColumn(name = "doctor_id")
-    )
-    private List<Doctor> doctors;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Appointment> appointments;

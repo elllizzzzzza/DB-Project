@@ -9,9 +9,9 @@ import java.util.List;
 @Entity
 @Table(name = "pharmacists")
 public class Pharmacist extends User {
-    @Column(name="license_number")
+    @Column(name = "license_number")
     private String licenseNum;
-    @Column(name="pharmacy_section")
+    @Column(name = "pharmacy_section")
     private String pharmacySection;
 
     @ManyToMany
@@ -21,9 +21,4 @@ public class Pharmacist extends User {
             inverseJoinColumns = @JoinColumn(name = "drug_id")
     )
     private List<Drug> drugs;
-
-
-    @OneToMany(mappedBy = "dispensedBy", cascade = CascadeType.ALL)
-    private List<Prescription> prescriptions;
 }
-

@@ -1,5 +1,7 @@
 package org.example.hospital.dto;
 import lombok.Data;
+import org.example.hospital.enums.ProcedureResultStatus;
+
 import java.time.LocalDate;
 @Data
 public class ProcedureDTO {
@@ -7,9 +9,7 @@ public class ProcedureDTO {
     private String testName;
     private LocalDate date;
     private String result;
-    private String resultStatus;
-    private Long patientId;
+    private ProcedureResultStatus resultStatus;
+    private Long appointmentId;
     private Long labId;
-    private Long labTechnicianId;
-    private Long doctorId;
 }

@@ -2,6 +2,8 @@ package org.example.hospital.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class PharmacistDTO {
     private Long userId;
@@ -10,5 +12,5 @@ public class PharmacistDTO {
     private String name;
     private String surname;
     private String phoneNum;
-    private String role;
+    private List<Long> drugIds;
 }

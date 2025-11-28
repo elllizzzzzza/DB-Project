@@ -13,15 +13,16 @@ public class Drug {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "drug_id")
     private Long drugId;
-    @Column(name = "name")
     private String name;
-    @Column(name = "description")
     private String description;
-    @Column(name = "price")
     private double price;
-    @Column(name = "isAvailable")
+    @Column(name = "is_available")
     private boolean isAvailable;
+
     @ManyToMany(mappedBy = "drugs")
     private List<Pharmacist> pharmacists;
+
+    @OneToMany(mappedBy = "drug", cascade = CascadeType.ALL)
+    private List<Prescription> prescriptions;
 }
 

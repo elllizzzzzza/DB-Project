@@ -6,5 +6,5 @@ public class DrugDTO {
     private String name;
     private String description;
     private double price;
-    private boolean available;
+    private boolean isAvailable;
 }

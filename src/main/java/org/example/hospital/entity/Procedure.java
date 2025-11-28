@@ -2,44 +2,38 @@ package org.example.hospital.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.hospital.enums.ProcedureResultStatus;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "procedure")
+@Table(name = "procedures")
 public class Procedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="test_id")
-    private Long testId;
-    @Column(name= "test_name")
-    private String testName;
-    @Column(name = "date")
-    private String date;
-    @Column(name = "result")
+    @Column(name="procedure_id")
+    private Long procedureId;
+
+    @Column(name= "procedure_name")
+    private String procedureName;
+
+    @Column(name="date")
+    private LocalDate date;
+
     private String result;
-    @Column(name = "resultStatus")
-    private String resultStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "result_status")
+    private ProcedureResultStatus resultStatus;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Patient patient;
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private Doctor doctor;
+    @JoinColumn(name = "appointment_id")
+    private Appointment appointment;
+
     @ManyToOne
     @JoinColumn(name = "lab_id")
     private Lab lab;
-
-    @ManyToOne
-    @JoinColumn(name = "lab_technician_id")
-    private LabTechnician labTechnician;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor requestedByDoctor;
-    @OneToMany(mappedBy = "labTest", cascade = CascadeType.ALL)
-    private List<Prescription> prescriptions;
 }

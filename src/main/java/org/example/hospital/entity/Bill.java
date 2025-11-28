@@ -2,6 +2,7 @@ package org.example.hospital.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.hospital.enums.PaymentStatus;
 
 import java.time.LocalDate;
 
@@ -15,9 +16,12 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long billId;
 
-    private double totalAmount;
-    private boolean paymentStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_status")
+    private PaymentStatus paymentStatus;
     private LocalDate dateIssued;
+    @Transient
+    private double totalAmount;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")

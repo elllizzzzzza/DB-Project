@@ -22,17 +22,16 @@ public abstract class User implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(nullable = false, unique = true, length = 50,name="username")
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false,name="password")
+    @Column(nullable = false)
     private String password;
 
-    @Column(unique = true,name="email")
+    @Column(unique = true)
     private String email;
-    @Column(name="name")
+
     private String name;
-    @Column(name="surname")
     private String surname;
     @Column(name="phone_num")
     private String phoneNum;
