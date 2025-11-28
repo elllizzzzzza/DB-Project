@@ -5,7 +5,7 @@ import org.example.hospital.converter.DrugConverter;
 import org.example.hospital.dto.DrugDTO;
 import org.example.hospital.entity.Drug;
 import org.example.hospital.repositories.DrugRepository;
-import org.example.hospital.service.DrugService;
+import org.example.hospital.services.DrugService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

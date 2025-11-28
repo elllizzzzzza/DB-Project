@@ -2,7 +2,7 @@ package org.example.hospital.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.hospital.dto.DrugDTO;
-import org.example.hospital.service.DrugService;
+import org.example.hospital.services.DrugService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
