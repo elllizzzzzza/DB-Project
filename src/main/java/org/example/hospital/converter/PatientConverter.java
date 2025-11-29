@@ -1,59 +1,43 @@
 package org.example.hospital.converter;
+
 import org.example.hospital.dto.PatientDTO;
 import org.example.hospital.entity.Patient;
-import org.example.hospital.enums.BloodType;
-import org.example.hospital.enums.Role;
 import org.springframework.stereotype.Component;
+
 @Component
-public class PatientConverter {
-    public PatientDTO toDTO(Patient patient) {
-        if (patient == null) return null;
-        PatientDTO dto = new PatientDTO();
-        dto.setUserId(patient.getUserId());
-        dto.setUsername(patient.getUsername());
-        dto.setEmail(patient.getEmail());
-        dto.setName(patient.getName());
-        dto.setSurname(patient.getSurname());
-        dto.setPhoneNum(patient.getPhoneNum());
-        if (patient.getRole() != null) {
-            dto.setRole(patient.getRole().name());
-        }
-        dto.setDateOfBirth(patient.getDateOfBirth());
-        dto.setGender(patient.getGender());
-        dto.setAddress(patient.getAddress());
-        dto.setIdCard(patient.getIdCard());
-        dto.setMedicalInsurance(patient.getMedicalInsurance());
-        if (patient.getBloodType() != null) {
-            dto.setBloodType(patient.getBloodType().name());
-        }
+public class PatientConverter implements Converter<Patient, PatientDTO> {
+
+    @Override
+    public PatientDTO convertToDTO(Patient entity, PatientDTO dto) {
+        dto.setUserId(entity.getUserId());
+        dto.setUsername(entity.getUsername());
+        dto.setEmail(entity.getEmail());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
+        dto.setPhoneNum(entity.getPhoneNum());
+        dto.setDateOfBirth(entity.getDateOfBirth());
+        dto.setGender(entity.getGender());
+        dto.setAddress(entity.getAddress());
+        dto.setBloodType(entity.getBloodType());
+        dto.setIdCard(entity.getIdCard());
+        dto.setMedicalInsurance(entity.getMedicalInsurance());
         return dto;
     }
-    public Patient toEntity(PatientDTO dto) {
-        if (dto == null) return null;
-        Patient patient = new Patient();
-        patient.setUserId(dto.getUserId());
-        patient.setUsername(dto.getUsername());
-        patient.setEmail(dto.getEmail());
-        patient.setName(dto.getName());
-        patient.setSurname(dto.getSurname());
-        patient.setPhoneNum(dto.getPhoneNum());
-        if (dto.getRole() != null) {
-            try {
-                patient.setRole(Role.valueOf(dto.getRole()));
-            } catch (IllegalArgumentException ex) {
-            }
-        }
-        patient.setDateOfBirth(dto.getDateOfBirth());
-        patient.setGender(dto.getGender());
-        patient.setAddress(dto.getAddress());
-        patient.setIdCard(dto.getIdCard());
-        patient.setMedicalInsurance(dto.getMedicalInsurance());
-        if (dto.getBloodType() != null) {
-            try {
-                patient.setBloodType(BloodType.valueOf(dto.getBloodType()));
-            } catch (IllegalArgumentException ex) {
-            }
-        }
-        return patient;
+
+    @Override
+    public Patient convertToEntity(PatientDTO dto, Patient entity) {
+        entity.setUserId(dto.getUserId());
+        entity.setUsername(dto.getUsername());
+        entity.setEmail(dto.getEmail());
+        entity.setName(dto.getName());
+        entity.setSurname(dto.getSurname());
+        entity.setPhoneNum(dto.getPhoneNum());
+        entity.setDateOfBirth(dto.getDateOfBirth());
+        entity.setGender(dto.getGender());
+        entity.setAddress(dto.getAddress());
+        entity.setBloodType(dto.getBloodType());
+        entity.setIdCard(dto.getIdCard());
+        entity.setMedicalInsurance(dto.getMedicalInsurance());
+        return entity;
     }
 }

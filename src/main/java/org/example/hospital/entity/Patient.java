@@ -31,11 +31,5 @@ public class Patient extends User {
     private List<Appointment> appointments;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Prescription> prescriptions;
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Procedure> procedures;
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Bill> bills;
 }

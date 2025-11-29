@@ -1,41 +1,35 @@
 package org.example.hospital.converter;
 
-import org.example.hospital.dto.DoctorDTO;
-import org.example.hospital.entity.*;
+import org.example.hospital.dto.NurseDTO;
+import org.example.hospital.entity.Department;
+import org.example.hospital.entity.Nurse;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DoctorConverter implements Converter<Doctor, DoctorDTO> {
+public class NurseConverter implements Converter<Nurse, NurseDTO> {
 
     @Override
-    public DoctorDTO convertToDTO(Doctor entity, DoctorDTO dto) {
+    public NurseDTO convertToDTO(Nurse entity, NurseDTO dto) {
         dto.setUserId(entity.getUserId());
         dto.setUsername(entity.getUsername());
         dto.setEmail(entity.getEmail());
         dto.setName(entity.getName());
         dto.setSurname(entity.getSurname());
         dto.setPhoneNum(entity.getPhoneNum());
-        dto.setInfo(entity.getInfo());
-        dto.setLicenseNumber(entity.getLicenseNum());
-        dto.setRoomNumber(entity.getRoomNum());
-
-        if (entity.getDepartment() != null)
-            dto.setDepartmentId(entity.getDepartment().getDeptId());
-
+        dto.setNurseLevel(entity.getNurseLevel());
+        if (entity.getDepartment() != null) dto.setDepartmentId(entity.getDepartment().getDeptId());
         return dto;
     }
 
     @Override
-    public Doctor convertToEntity(DoctorDTO dto, Doctor entity) {
+    public Nurse convertToEntity(NurseDTO dto, Nurse entity) {
         entity.setUserId(dto.getUserId());
         entity.setUsername(dto.getUsername());
         entity.setEmail(dto.getEmail());
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setPhoneNum(dto.getPhoneNum());
-        entity.setInfo(dto.getInfo());
-        entity.setLicenseNum(dto.getLicenseNumber());
-        entity.setRoomNum(dto.getRoomNumber());
+        entity.setNurseLevel(dto.getNurseLevel());
 
         if (dto.getDepartmentId() != null) {
             Department department = new Department();

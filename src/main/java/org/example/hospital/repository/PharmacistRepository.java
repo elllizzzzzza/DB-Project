@@ -1,4 +1,4 @@
-package org.example.hospital.repositories;
+package org.example.hospital.repository;
 
 import org.example.hospital.entity.Pharmacist;
 import org.springframework.data.jpa.repository.JpaRepository;
