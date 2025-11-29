@@ -14,7 +14,6 @@ public class PatientDTO {
     private String name;
     private String surname;
     private String phoneNum;
-   // private String role;
     private LocalDate dateOfBirth;
     private Gender gender;
     private String address;
@@ -22,3 +21,4 @@ public class PatientDTO {
     private String idCard;
     private String medicalInsurance;
 }
+

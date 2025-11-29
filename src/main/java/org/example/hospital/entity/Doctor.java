@@ -18,9 +18,6 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Schedule> schedule;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    private List<Prescription> prescriptions;
-
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;

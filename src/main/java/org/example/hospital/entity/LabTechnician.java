@@ -3,6 +3,7 @@ package org.example.hospital.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -10,7 +11,7 @@ import java.util.List;
 @Table(name = "lab_technicians")
 public class LabTechnician extends User {
     @Column(name= "employment_start_date")
-    private String employmentStartDate;
+    private LocalDate employmentStartDate;
 
     @ManyToOne
     @JoinColumn(name = "lab_id")

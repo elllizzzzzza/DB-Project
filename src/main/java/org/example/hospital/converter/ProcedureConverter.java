@@ -4,56 +4,46 @@ import org.example.hospital.dto.ProcedureDTO;
 import org.example.hospital.entity.*;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-
 @Component
-public class ProcedureConverter {
+public class ProcedureConverter implements Converter<Procedure, ProcedureDTO> {
 
-    public ProcedureDTO toDTO(Procedure procedure) {
-        if (procedure == null) return null;
+    @Override
+    public ProcedureDTO convertToDTO(Procedure entity, ProcedureDTO dto) {
+        dto.setProcedureId(entity.getProcedureId());
+        dto.setProcedureName(entity.getProcedureName());
+        dto.setDate(entity.getDate());
+        dto.setResult(entity.getResult());
+        dto.setResultStatus(entity.getResultStatus());
 
-        ProcedureDTO dto = new ProcedureDTO();
-        dto.setProcedureId(procedure.getTestId());
-        dto.setTestName(procedure.getTestName());
-        dto.setDate(LocalDate.parse((procedure.getDate())));
-        dto.setResult(procedure.getResult());
+        if (entity.getAppointment() != null)
+            dto.setAppointmentId(entity.getAppointment().getApptId());
 
-        if (procedure.getResultStatus() != null) {
-            dto.setResultStatus(procedure.getResultStatus());
-        }
-
-        if (procedure.getPatient() != null) {
-            dto.setPatientId(procedure.getPatient().getUserId());
-        }
-        if (procedure.getLab() != null) {
-            dto.setLabId(procedure.getLab().getLabId());
-        }
-        if (procedure.getLabTechnician() != null) {
-            dto.setLabTechnicianId(procedure.getLabTechnician().getUserId());
-        }
-        if (procedure.getDoctor() != null) {
-            dto.setDoctorId(procedure.getDoctor().getUserId());
-        }
+        if (entity.getLab() != null)
+            dto.setLabId(entity.getLab().getLabId());
 
         return dto;
     }
 
-    public Procedure toEntity(ProcedureDTO dto,
-                              Patient patient,
-                              Lab lab,
-                              LabTechnician labTechnician,
-                              Doctor doctor) {
-        if (dto == null) return null;
+    @Override
+    public Procedure convertToEntity(ProcedureDTO dto, Procedure entity) {
+        entity.setProcedureId(dto.getProcedureId());
+        entity.setProcedureName(dto.getProcedureName());
+        entity.setDate(dto.getDate());
+        entity.setResult(dto.getResult());
+        entity.setResultStatus(dto.getResultStatus());
 
-        Procedure p = new Procedure();
-        p.setTestId(dto.getProcedureId());
-        p.setTestName(dto.getTestName());
-        p.setDate(String.valueOf(dto.getDate()));
-        p.setResult(dto.getResult());
-        p.setPatient(patient);
-        p.setLab(lab);
-        p.setLabTechnician(labTechnician);
-        p.setDoctor(doctor);
-        return p;
+        if (dto.getAppointmentId() != null) {
+            Appointment appointment = new Appointment();
+            appointment.setApptId(dto.getAppointmentId());
+            entity.setAppointment(appointment);
+        }
+
+        if (dto.getLabId() != null) {
+            Lab lab = new Lab();
+            lab.setLabId(dto.getLabId());
+            entity.setLab(lab);
+        }
+
+        return entity;
     }
 }

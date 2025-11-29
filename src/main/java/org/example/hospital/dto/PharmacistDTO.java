@@ -12,5 +12,8 @@ public class PharmacistDTO {
     private String name;
     private String surname;
     private String phoneNum;
+    private String licenseNum;
+    private String pharmacySection;
     private List<Long> drugIds;
 }
+

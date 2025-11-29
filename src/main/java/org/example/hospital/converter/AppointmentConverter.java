@@ -1,36 +1,51 @@
 package org.example.hospital.converter;
+
 import org.example.hospital.dto.AppointmentDTO;
-import org.example.hospital.entity.Appointment;
-import org.example.hospital.entity.Doctor;
-import org.example.hospital.entity.Patient;
+import org.example.hospital.entity.*;
 import org.springframework.stereotype.Component;
+
 @Component
-public class AppointmentConverter {
-    public AppointmentDTO toDTO(Appointment appointment) {
-        if (appointment == null) return null;
-        AppointmentDTO dto = new AppointmentDTO();
-        dto.setAppointmentId(appointment.getAppId());
-        dto.setAppointmentDate(appointment.getStartTime());
-        dto.setDuration(appointment.getDuration());
-        if (appointment.getDoctor() != null) {
-            dto.setDoctorId(appointment.getDoctor().getUserId());
-        }
-        if (appointment.getPatient() != null) {
-            dto.setPatientId(appointment.getPatient().getUserId());
-        }
-        if (appointment.getStauts()!= null) {
-            dto.setStatus(appointment.getStauts());
-        }
+public class AppointmentConverter implements Converter<Appointment, AppointmentDTO> {
+
+    @Override
+    public AppointmentDTO convertToDTO(Appointment entity, AppointmentDTO dto) {
+        dto.setAppointmentId(entity.getApptId());
+        dto.setSymptom(entity.getSymptom());
+        dto.setStartTime(entity.getStartTime());
+        dto.setEndTime(entity.getEndTime());
+        dto.setStatus(entity.getStatus());
+        dto.setDuration(entity.getDuration());
+
+        if (entity.getDoctor() != null)
+            dto.setDoctorId(entity.getDoctor().getUserId());
+
+        if (entity.getPatient() != null)
+            dto.setPatientId(entity.getPatient().getUserId());
+
         return dto;
     }
-    public Appointment toEntity(AppointmentDTO dto, Doctor doctor, Patient patient) {
-        if (dto == null) return null;
-        Appointment a = new Appointment();
-        a.setAppId(dto.getAppointmentId());
-        a.setStartTime(dto.getAppointmentDate());
-        a.setDuration(dto.getDuration());
-        a.setDoctor(doctor);
-        a.setPatient(patient);
-        return a;
+
+    @Override
+    public Appointment convertToEntity(AppointmentDTO dto, Appointment entity) {
+        entity.setApptId(dto.getAppointmentId());
+        entity.setSymptom(dto.getSymptom());
+        entity.setStartTime(dto.getStartTime());
+        entity.setEndTime(dto.getEndTime());
+        entity.setStatus(dto.getStatus());
+        entity.setDuration(dto.getDuration());
+
+        if (dto.getDoctorId() != null) {
+            Doctor doctor = new Doctor();
+            doctor.setUserId(dto.getDoctorId());
+            entity.setDoctor(doctor);
+        }
+
+        if (dto.getPatientId() != null) {
+            Patient patient = new Patient();
+            patient.setUserId(dto.getPatientId());
+            entity.setPatient(patient);
+        }
+
+        return entity;
     }
 }

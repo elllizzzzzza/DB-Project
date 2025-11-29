@@ -1,49 +1,59 @@
 package org.example.hospital.converter;
+
 import org.example.hospital.dto.PrescriptionDTO;
 import org.example.hospital.entity.*;
 import org.springframework.stereotype.Component;
+
 @Component
-public class PrescriptionConverter {
-    public PrescriptionDTO toDTO(Prescription prescription) {
-        if (prescription == null) return null;
-        PrescriptionDTO dto = new PrescriptionDTO();
-        dto.setPresId(prescription.getPresId());
-        dto.setDosage(prescription.getDosage());
-        dto.setFrequency(prescription.getFrequency());
-        if (prescription.getDrug() != null) {
-            dto.setDrugId(prescription.getDrug().getDrugId());
+public class PrescriptionConverter implements Converter<Prescription, PrescriptionDTO> {
+
+    @Override
+    public PrescriptionDTO convertToDTO(Prescription entity, PrescriptionDTO dto) {
+        dto.setPresId(entity.getPresId());
+        dto.setStrength(entity.getStrength());
+        dto.setDosageForm(entity.getDosageForm());
+        dto.setSig(entity.getSig());
+        dto.setQuantityToDispense(entity.getQuantityToDispense());
+        dto.setRoute(entity.getRoute());
+        dto.setFrequency(entity.getFrequency());
+        dto.setDuration(entity.getDuration());
+        dto.setPrescriptionDate(entity.getPrescriptionDate());
+
+        if (entity.getAppointment() != null)
+            dto.setAppointmentId(entity.getAppointment().getApptId());
+
+        if (entity.getDrug() != null) {
+            dto.setDrugId(entity.getDrug().getDrugId());
+            dto.setDrugName(entity.getDrug().getName()); // DTO only
         }
-        if (prescription.getPatient() != null) {
-            dto.setPatientId(prescription.getPatient().getUserId());
-        }
-        if (prescription.getDoctor() != null) {
-            dto.setDoctorId(prescription.getDoctor().getUserId());
-        }
-        if (prescription.getDispensedBy() != null) {
-            dto.setPharmacistId(prescription.getDispensedBy().getUserId());
-        }
-        if (prescription.getProcedure() != null) {
-            dto.setProcedureId(prescription.getProcedure().getTestId());
-        }
-        dto.setTotalPrice(prescription.getTotalPrice());
+
         return dto;
     }
-    public Prescription toEntity(PrescriptionDTO dto,
-                                 Drug drug,
-                                 Patient patient,
-                                 Doctor doctor,
-                                 Pharmacist pharmacist,
-                                 Procedure procedure) {
-        if (dto == null) return null;
-        Prescription p = new Prescription();
-        p.setPresId(dto.getPresId());
-        p.setDosage(dto.getDosage());
-        p.setFrequency(dto.getFrequency());
-        p.setDrug(drug);
-        p.setPatient(patient);
-        p.setDoctor(doctor);
-        p.setDispensedBy(pharmacist);
-        p.setProcedure(procedure);
-        return p;
+
+    @Override
+    public Prescription convertToEntity(PrescriptionDTO dto, Prescription entity) {
+        entity.setPresId(dto.getPresId());
+        entity.setStrength(dto.getStrength());
+        entity.setDosageForm(dto.getDosageForm());
+        entity.setSig(dto.getSig());
+        entity.setQuantityToDispense(dto.getQuantityToDispense());
+        entity.setRoute(dto.getRoute());
+        entity.setFrequency(dto.getFrequency());
+        entity.setDuration(dto.getDuration());
+        entity.setPrescriptionDate(dto.getPrescriptionDate());
+
+        if (dto.getAppointmentId() != null) {
+            Appointment appointment = new Appointment();
+            appointment.setApptId(dto.getAppointmentId());
+            entity.setAppointment(appointment);
+        }
+
+        if (dto.getDrugId() != null) {
+            Drug drug = new Drug();
+            drug.setDrugId(dto.getDrugId());
+            entity.setDrug(drug);
+        }
+
+        return entity;
     }
 }
